@@ -8,6 +8,8 @@ from gensim.models import KeyedVectors
 import requests
 import os
 
+plt.rcParams['font.family'] = 'MS Gothic'
+
 dropbox_link = "https://www.dropbox.com/scl/fi/89zfk7npuo5suivpkox97/jawiki.word_vectors.300d.bin?rlkey=4hi0dkpr16plbsdb2w37v3u1r&st=3miejyz1&dl=1"
 
 def download_file(url, destination):
