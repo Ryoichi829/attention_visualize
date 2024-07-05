@@ -1,0 +1,6 @@
+streamlit
+gensim==4.3.0
+scipy==1.10.1
+matplotlib
+seaborn
+janome
