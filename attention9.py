@@ -2,13 +2,12 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+import japanize_matplotlib
 import seaborn as sns
 from janome.tokenizer import Tokenizer
 from gensim.models import KeyedVectors
 import requests
 import os
-
-plt.rcParams['font.family'] = 'MS Gothic'
 
 dropbox_link = "https://www.dropbox.com/scl/fi/89zfk7npuo5suivpkox97/jawiki.word_vectors.300d.bin?rlkey=4hi0dkpr16plbsdb2w37v3u1r&st=3miejyz1&dl=1"
 
@@ -30,7 +29,6 @@ def self_attention(Q, K, V):
     return output, attention_weights
 
 def plot_attention(tokens, attention_weights):
-    plt.rcParams['font.family'] = "MS Gothic"
     fig, ax = plt.subplots(figsize=(10, 10))
     sns.heatmap(attention_weights, xticklabels=tokens, yticklabels=tokens, ax=ax, annot=True, fmt=".2f", cmap="viridis")
     ax.xaxis.tick_top()
@@ -89,12 +87,6 @@ def main():
 
         fig = plot_attention(tokens, attention_weights)
         st.pyplot(fig)
-
-        # Highlighting specific relationship
-        # if "それ" in tokens and "餌" in tokens:
-        #    sore_index = tokens.index("それ")
-        #    esa_index = tokens.index("餌")
-        #    st.write(f"Attention weight from 'それ' to '餌': {attention_weights[sore_index][esa_index]:.2f}")
 
 if __name__ == "__main__":
     main()
