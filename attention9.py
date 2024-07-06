@@ -58,7 +58,7 @@ def main():
         # load pre-trained word vectors
         word_vectors = load_word_vectors()
 
-    sentence = st.text_area("Enter a sentence to visualize attention", "昨日、友達と映画を見に行った。とても面白かった。")
+    sentence = st.text_area("文章を入力してください。", "昨日、友達と映画を見に行った。とても面白かった。")
     if st.button("Visualize"):
         tokens = tokenize_japanese(sentence)
         # st.write('tokens', tokens)
