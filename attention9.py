@@ -51,14 +51,14 @@ def load_word_vectors():
     return model
 
 def main():
-    st.title("Self-Attention Mechanism Visualization (Japanese)")
+    st.title("Self-Attention Mechanism Visualization")
 
     # モデルのロードをローディングインジケーターで包む
     with st.spinner('モデル(800MB)をロード中...しばらくお待ちください。'):
         # load pre-trained word vectors
         word_vectors = load_word_vectors()
 
-    sentence = st.text_area("文章を入力してください。", "昨日、友達と映画を見に行った。とても面白かった。")
+    sentence = st.text_area("文章を入力してください。", "ブドウの粒が大きくて甘みが強く美味しかった。")
     if st.button("Visualize"):
         tokens = tokenize_japanese(sentence)
         # st.write('tokens', tokens)
