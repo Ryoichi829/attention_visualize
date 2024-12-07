@@ -1,4 +1,4 @@
-python==3.11
+python==3.11.5
 streamlit==1.40.2
 gensim==4.3.0
 numpy==1.25.2
