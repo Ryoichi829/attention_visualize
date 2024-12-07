@@ -1,6 +1,6 @@
 streamlit==1.40.2
 gensim==4.3.0
-numpy==1.24.4
+numpy==1.26.0
 scipy==1.9.3
 setuptools==68.0.0
 matplotlib
