@@ -1,9 +1,9 @@
 streamlit==1.40.2
 gensim==4.3.0
-setuptools
-numpy==1.25.2
+setuptools<60.0.0
+numpy==1.23.5
 scipy==1.10.1
-matplotlib
+matplotlib==3.6.3
 japanize_matplotlib
-seaborn
+seaborn==0.12.2
 janome
