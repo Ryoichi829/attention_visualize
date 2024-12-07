@@ -1,6 +1,6 @@
 streamlit
 gensim==4.3.0
-scipy==1.10.1
+scipy==1.9.3
 matplotlib
 japanize_matplotlib
 seaborn
