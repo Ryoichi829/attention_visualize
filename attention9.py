@@ -73,7 +73,7 @@ def main():
             if word in word_vectors:
                 embeddings[idx] = word_vectors[word]
             else:
-                embedding[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
+                embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
 
         Q = embeddings[token_ids]
         K = embeddings[token_ids]
