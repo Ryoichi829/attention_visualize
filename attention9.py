@@ -88,5 +88,8 @@ def main():
         fig = plot_attention(tokens, attention_weights)
         st.pyplot(fig)
 
+        # 著作権表示
+        st.write("東北大学乾研究室の日本語Wikipediaエンティティベクトルを使用しています。")
+
 if __name__ == "__main__":
     main()
