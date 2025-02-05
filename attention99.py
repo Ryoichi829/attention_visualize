@@ -59,7 +59,7 @@ def main():
         # load pre-trained word vectors
         word_vectors = load_word_vectors()
 
-    sentence = st.text_area("文章を入力してください。", "ブドウの粒が大きくて甘みが強く美味しかった。")
+    sentence = st.text_area("文章を入力してください。", "昨日インスタに写真をアップした。")
     if st.button("Visualize"):
         tokens = tokenize_japanese(sentence)
         # st.write('tokens', tokens)
