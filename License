@@ -20,3 +20,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+Note: The pretrained Japanese Word2Vec model used in this software is hosted on 
+a private Dropbox link.  
+There is **no guarantee of permanent availability** of this model. If the link
+becomes invalid in the future, users are responsible for preparing the model 
+file themselves.
