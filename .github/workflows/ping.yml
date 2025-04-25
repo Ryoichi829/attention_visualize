@@ -1,0 +1,12 @@
+name: Keep Streamlit App (Attention) Alive
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # 00分ごとに実行（UTC時間）
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl your Streamlit App (Attention)
+        run: curl -s https://attentionvisualize-brzyt2bcu5xw4csp3jfcem.streamlit.app/
