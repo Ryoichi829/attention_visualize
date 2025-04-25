@@ -40,6 +40,9 @@ def plot_attention(tokens, attention_weights):
 def tokenize_japanese(text):
     tokenizer = Tokenizer()
     tokens = [token.surface for token in tokenizer.tokenize(text)]
+    if len(tokens) > 15:
+        st.warning(f"単語数が多いため、先頭15個に制限しました。")
+        tokens = tokens[:15]
     return tokens
 
 # @st.cache(allow_output_mutation=True)
