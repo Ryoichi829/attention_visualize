@@ -1,4 +1,4 @@
-name: Keep Streamlit App (Attention) Alive
+name: Keep Streamlit App (3-d vecor visualization) Alive
 
 on:
   schedule:
@@ -8,5 +8,5 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Curl your Streamlit App (Attention)
-        run: curl -s https://attentionvisualize-brzyt2bcu5xw4csp3jfcem.streamlit.app/
+      - name: Curl your Streamlit App (3-d vecor visualization)
+        run: curl -s https://word3d-b55mwlmtulmgspme2njkxc.streamlit.app/ 
