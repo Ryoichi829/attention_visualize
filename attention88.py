@@ -263,6 +263,6 @@ def main():
             head_index = st.slider("ヘッド番号", min_value=0, max_value=num_heads-1, value=0, step=1)
 
         fig = plot_attention(tokens, attn, head_mode, head_index, annotate, cmap)
-        st.pyp
+        st.pyplot(fig)
 if __name__ == "__main__":
     main()
