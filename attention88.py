@@ -264,3 +264,5 @@ def main():
 
         fig = plot_attention(tokens, attn, head_mode, head_index, annotate, cmap)
         st.pyp
+if __name__ == "__main__":
+    main()
