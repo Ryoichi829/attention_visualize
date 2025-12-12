@@ -5,7 +5,7 @@ numpy==1.26.4
 scipy==1.10.1
 #可視化
 matplotlib==3.8.4
-japanize_matplotlib
+japanize-matplotlib
 seaborn>=0.13.2
 #その他
 openai==0.28
