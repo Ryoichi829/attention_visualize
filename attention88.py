@@ -14,7 +14,7 @@ Streamlit: Transformer風 自己注意ヒートマップ（改良・完全版）
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib_fontja
+import japanize_matplotlib
 import seaborn as sns
 from janome.tokenizer import Tokenizer
 from gensim.models import KeyedVectors
