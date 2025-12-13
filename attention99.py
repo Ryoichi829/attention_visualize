@@ -69,13 +69,15 @@ def main():
         vocab = {word: idx for idx, word in enumerate(set(tokens))}
         token_ids = np.array([vocab[word] for word in tokens])
 
-        embedding_dim = 300
+        # embedding_dim = 300
+        embedding_dim = 100 # 300次元から100次元を切り出す
         embeddings = np.zeros((len(vocab), embedding_dim))
         
         # st.write('vocab:', vocab)
         for word, idx in vocab.items():
             if word in word_vectors:
                 embeddings[idx] = word_vectors[word]
+                embeddings[idx] = word_vectors[word][:embedding_dim]
             else:
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
 
