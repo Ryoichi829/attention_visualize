@@ -53,6 +53,13 @@ def load_word_vectors():
     temp_path = "/tmp/jawiki.word_vectors.100d.bin"
     if not os.path.exists(temp_path):
         download_file(dropbox_link, temp_path)
+
+    st.write("Downloaded size (bytes):", os.path.getsize(temp_path))
+
+    with open(temp_path, "rb") as f:
+        head = f.read(80)
+    st.write("Head(80 bytes):", head)
+    
     model = KeyedVectors.load_word2vec_format(temp_path, binary=True)
     return model
 
