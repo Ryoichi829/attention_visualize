@@ -9,7 +9,7 @@ from gensim.models import KeyedVectors
 import requests
 import os
 
-dropbox_link = "https://www.dropbox.com/scl/fi/xvpmnduzus1xt4x1oqj09/jawiki.entity_vectors.100d_200_000.bin?rlkey=gwxb0swvg23ekh9mhezjw6f6j&st=p752egym&dl=0"
+dropbox_link = "https://www.dropbox.com/scl/fi/xvpmnduzus1xt4x1oqj09/jawiki.entity_vectors.100d_200_000.bin?rlkey=gwxb0swvg23ekh9mhezjw6f6j&st=p752egym&dl=1"
 
 def download_file(url, destination):
     response = requests.get(url, stream=True)
