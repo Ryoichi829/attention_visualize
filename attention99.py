@@ -76,7 +76,6 @@ def main():
         # st.write('vocab:', vocab)
         for word, idx in vocab.items():
             if word in word_vectors:
-                embeddings[idx] = word_vectors[word]
                 embeddings[idx] = word_vectors[word][:embedding_dim]
             else:
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
