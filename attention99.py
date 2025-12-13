@@ -9,7 +9,8 @@ from gensim.models import KeyedVectors
 import requests
 import os
 
-dropbox_link = "https://www.dropbox.com/scl/fi/89zfk7npuo5suivpkox97/jawiki.word_vectors.300d.bin?rlkey=4hi0dkpr16plbsdb2w37v3u1r&st=3miejyz1&dl=1"
+# dropbox_link = "https://www.dropbox.com/scl/fi/89zfk7npuo5suivpkox97/jawiki.word_vectors.300d.bin?rlkey=4hi0dkpr16plbsdb2w37v3u1r&st=3miejyz1&dl=1"
+google_drive_link = "https://drive.google.com/file/d/uc?id=1le4_yPaYza_WOqjk3MKaPInmIImjdVgm"
 
 def download_file(url, destination):
     response = requests.get(url, stream=True)
@@ -50,9 +51,9 @@ def tokenize_japanese(text):
 # @st.cache(allow_output_mutation=True)
 @st.cache_resource
 def load_word_vectors():
-    temp_path = "/tmp/jawiki.word_vectors.300d.bin"
+    temp_path = "/tmp/jawiki.word_vectors.100d.bin"
     if not os.path.exists(temp_path):
-        download_file(dropbox_link, temp_path)
+        download_file(google_drive_link, temp_path)
     model = KeyedVectors.load_word2vec_format(temp_path, binary=True)
     return model
 
@@ -60,7 +61,7 @@ def main():
     st.title("Self-Attention Mechanism Visualization")
 
     # モデルのロードをローディングインジケーターで包む
-    with st.spinner('モデル(800MB)をロード中...しばらくお待ちください。'):
+    with st.spinner('モデル(80MB)をロード中...しばらくお待ちください。'):
         # load pre-trained word vectors
         word_vectors = load_word_vectors()
 
@@ -71,8 +72,7 @@ def main():
         vocab = {word: idx for idx, word in enumerate(set(tokens))}
         token_ids = np.array([vocab[word] for word in tokens])
 
-        # embedding_dim = 300
-        embedding_dim = 100 # 300次元から100次元を切り出す
+        embedding_dim = 100
         embeddings = np.zeros((len(vocab), embedding_dim))
         
         # st.write('vocab:', vocab)
