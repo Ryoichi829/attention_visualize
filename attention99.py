@@ -18,7 +18,8 @@ def download_file(url, destination):
             if chunk:
                 f.write(chunk)
 
-def softmax(x):
+def softmax(x, T=1.0):
+    x = x / T
     e_x = np.exp(x - np.max(x))
     return e_x / e_x.sum(axis=-1, keepdims=True)
 
@@ -26,7 +27,7 @@ def self_attention(Q, K, V):
     scores = np.dot(Q, K.T) / np.sqrt(K.shape[-1])
     # 対角マスク（自分自身への注意を禁止）
     np.fill_diagonal(scores, -1e9)
-    attention_weights = softmax(scores)
+    attention_weights = softmax(scores, T=2.0) # 2.0でマイルドにする
     output = np.dot(attention_weights, V)
     return output, attention_weights
 
