@@ -45,7 +45,7 @@ def plot_attention(tokens, attention_weights):
     diag = np.eye(n, dtype=bool)
     overlay = np.full((n, n), np.nan, dtype=float)
     overlay[diag] = 1.0
-    sns.heatmap(overlay, ax=ax, cmap=sns.color_palette(["#DDDDDD"]), cbar=False, annot=False, xticklabels=False, yticklabels=False)
+    sns.heatmap(overlay, ax=ax, cmap=sns.color_palette(["#CCCCCC"]), cbar=False, annot=False, xticklabels=False, yticklabels=False)
     
     # 対角線の数字を消す
     for t in ax.texts:
