@@ -27,13 +27,14 @@ def self_attention(Q, K, V):
     scores = np.dot(Q, K.T) / np.sqrt(K.shape[-1])
     # 対角マスク（自分自身への注意を禁止）
     np.fill_diagonal(scores, -1e9)
-    attention_weights = softmax(scores, T=2.0) # 2.0でマイルドにする
+    attention_weights = softmax(scores, T=1.5) # 2.0でマイルドにする
     output = np.dot(attention_weights, V)
     return output, attention_weights
 
 def plot_attention(tokens, attention_weights):
     fig, ax = plt.subplots(figsize=(10, 10))
-    sns.heatmap(attention_weights, xticklabels=tokens, yticklabels=tokens, ax=ax, annot=True, fmt=".2f", cmap="viridis")
+    diag_mask = np.eye(len(tokens), dtype=bool)  # 対角 True
+    sns.heatmap(attention_weights, xticklabels=tokens, yticklabels=tokens, ax=ax, mask=diag_mask, annot=True, fmt=".2f", cmap="viridis")
     ax.xaxis.tick_top()
     ax.set_yticklabels(tokens, rotation=0)
     ax.set_ylabel('query token')
