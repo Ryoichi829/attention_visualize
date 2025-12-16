@@ -33,6 +33,7 @@ def self_attention(Q, K, V):
 
 def plot_attention(tokens, attention_weights):
     fig, ax = plt.subplots(figsize=(10, 10))
+    n = len(tokens)
     # 通常描画
     sns.heatmap(attention_weights, xticklabels=tokens, yticklabels=tokens, ax=ax, annot=True, fmt=".2f", cmap="viridis")
     ax.xaxis.tick_top()
