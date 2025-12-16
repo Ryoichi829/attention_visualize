@@ -35,11 +35,7 @@ def plot_attention(tokens, attention_weights):
     fig, ax = plt.subplots(figsize=(10, 10))
     n = len(tokens)
     # 通常描画
-    sns.heatmap(attention_weights, xticklabels=tokens, yticklabels=tokens, ax=ax, annot=True, fmt=".2f", cmap="viridis")
-    ax.xaxis.tick_top()
-    ax.set_yticklabels(tokens, rotation=0)
-    ax.set_ylabel('query token')
-    ax.set_title("Self-Attention Heatmap\n\nkey token")
+    sns.heatmap(attention_weights, xticklabels=False, yticklabels=False, ax=ax, annot=True, fmt=".2f", cmap="viridis")
     
     # 対角線だけグレーを上書き
     diag = np.eye(n, dtype=bool)
@@ -54,7 +50,12 @@ def plot_attention(tokens, attention_weights):
         row = int(round(y - 0.5))
         if row == col:
             t.set_text("")
-            
+
+    ax.set_xticks(np.arange(n) + 0.5)
+    ax.set_yticks(np.arange(n) + 0.5)
+    ax.set_xticklabels(tokens, rotation=0)
+    ax.set_yticklabels(tokens, rotation=0)
+
     ax.xaxis.tick_top()
     ax.set_yticklabels(tokens, rotation=0)
     ax.set_ylabel('query token')
