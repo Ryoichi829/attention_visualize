@@ -33,12 +33,27 @@ def self_attention(Q, K, V):
 
 def plot_attention(tokens, attention_weights):
     fig, ax = plt.subplots(figsize=(10, 10))
-    diag_mask = np.eye(len(tokens), dtype=bool)  # 対角 True
-    sns.heatmap(attention_weights, xticklabels=tokens, yticklabels=tokens, ax=ax, mask=diag_mask, annot=True, fmt=".2f", cmap="viridis")
+    # 通常描画
+    sns.heatmap(attention_weights, xticklabels=tokens, yticklabels=tokens, ax=ax, annot=True, fmt=".2f", cmap="viridis")
     ax.xaxis.tick_top()
     ax.set_yticklabels(tokens, rotation=0)
     ax.set_ylabel('query token')
     ax.set_title("Self-Attention Heatmap\n\nkey token")
+    
+    # 対角線だけグレーを上書き
+    diag = np.eye(n, dtype=bool)
+    overlay = np.full((n, n), np.nan, dtype=float)
+    overlay[diag] = 1.0
+    sns.heatmap(overlay, ax=ax, cmap=sns.color_palette(["#DDDDDD"]), cbar=False, annot=False, xticklabels=False, yticklabels=False)
+    
+    # 対角線の数字を消す
+    for t in ax.texts:
+        x, y = t.get_position()  # (col+0.5, row+0.5)
+        col = int(round(x - 0.5))
+        row = int(round(y - 0.5))
+        if row == col:
+            t.set_text("")
+            
     return fig
 
 def tokenize_japanese(text):
