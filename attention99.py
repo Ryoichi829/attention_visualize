@@ -55,6 +55,11 @@ def plot_attention(tokens, attention_weights):
         if row == col:
             t.set_text("")
             
+    ax.xaxis.tick_top()
+    ax.set_yticklabels(tokens, rotation=0)
+    ax.set_ylabel('query token')
+    ax.set_title("Self-Attention Heatmap\n\nkey token")
+            
     return fig
 
 def tokenize_japanese(text):
