@@ -24,7 +24,7 @@ def softmax(x, T=1.0):
     return e_x / e_x.sum(axis=-1, keepdims=True)
 
 def self_attention(Q, K, V):
-    scores = np.dot(Q, K.T)
+    scores = np.dot(Q, K.T) * 6
     # 対角マスク（自分自身への注意を禁止）
     np.fill_diagonal(scores, -1e9)
     attention_weights = softmax(scores, T=0.5)
@@ -88,7 +88,7 @@ def normalize_rows(x):
 def main():
     st.title("Self-Attention Mechanism Visualization")
     word_vectors = load_word_vectors()
-    sentence = st.text_area("文章を入力してください。", "昨日インスタに写真をアップした。")
+    sentence = st.text_area("文章を入力してください。", "このケーキはやばいほど美味しい。")
     if st.button("Visualize"):
         tokens = tokenize_japanese(sentence)
         # st.write('tokens', tokens)
@@ -104,7 +104,7 @@ def main():
                 embeddings[idx] = word_vectors[word][:embedding_dim]
             else:
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
-            for word in ["は","が","を","に","の","と","で"]:
+            for word in ["は","が","を","に","の","と","で","。"]:
                 embeddings[idx] *= 0.3
 
         # np.random.seed(0)
