@@ -27,7 +27,7 @@ def self_attention(Q, K, V):
     scores = np.dot(Q, K.T) / np.sqrt(K.shape[-1])
     # 対角マスク（自分自身への注意を禁止）
     np.fill_diagonal(scores, -1e9)
-    attention_weights = softmax(scores, T=1.5) # 2.0でマイルドにする
+    attention_weights = softmax(scores, T=2.0) # 2.0でマイルドにする
     output = np.dot(attention_weights, V)
     return output, attention_weights
 
@@ -101,20 +101,20 @@ def main():
             else:
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
 
-        np.random.seed(0)
+        # np.random.seed(0)
         
-        Wq = np.random.randn(embedding_dim, embedding_dim)
-        Wk = np.random.randn(embedding_dim, embedding_dim)
-        Wv = np.random.randn(embedding_dim, embedding_dim)
+        # Wq = np.random.randn(embedding_dim, embedding_dim)
+        # Wk = np.random.randn(embedding_dim, embedding_dim)
+        # Wv = np.random.randn(embedding_dim, embedding_dim)
 
-        Q = embeddings[token_ids] @ Wq
-        K = embeddings[token_ids] @ Wk
-        V = embeddings[token_ids] @ Wv
+        # Q = embeddings[token_ids] @ Wq
+        # K = embeddings[token_ids] @ Wk
+        # V = embeddings[token_ids] @ Wv
 
         
-        # Q = embeddings[token_ids]
-        # K = embeddings[token_ids]
-        # V = embeddings[token_ids]
+        Q = embeddings[token_ids]
+        K = embeddings[token_ids]
+        V = embeddings[token_ids]
 
         # st.write('Q.shape=', Q.shape)
         # st.write('Q=', Q)
