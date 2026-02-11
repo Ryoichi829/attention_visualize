@@ -101,6 +101,8 @@ def main():
             else:
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
 
+        np.random.seed(0)
+        
         Wq = np.random.randn(embedding_dim, embedding_dim)
         Wk = np.random.randn(embedding_dim, embedding_dim)
         Wv = np.random.randn(embedding_dim, embedding_dim)
