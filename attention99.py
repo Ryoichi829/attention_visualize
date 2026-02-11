@@ -27,7 +27,7 @@ def self_attention(Q, K, V):
     scores = np.dot(Q, K.T) / np.sqrt(K.shape[-1])
     # 対角マスク（自分自身への注意を禁止）
     np.fill_diagonal(scores, -1e9)
-    attention_weights = softmax(scores, T=2.0) # 2.0でマイルドにする
+    attention_weights = softmax(scores, T=1.8) # 2.0でマイルドにする
     output = np.dot(attention_weights, V)
     return output, attention_weights
 
