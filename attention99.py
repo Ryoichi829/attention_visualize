@@ -101,9 +101,18 @@ def main():
             else:
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
 
-        Q = embeddings[token_ids]
-        K = embeddings[token_ids]
-        V = embeddings[token_ids]
+        Wq = np.random.randn(embedding_dim, embedding_dim)
+        Wk = np.random.randn(embedding_dim, embedding_dim)
+        Wv = np.random.randn(embedding_dim, embedding_dim)
+
+        Q = embeddings[token_ids] @ Wq
+        K = embeddings[token_ids] @ Wk
+        V = embeddings[token_ids] @ Wv
+
+        
+        # Q = embeddings[token_ids]
+        # K = embeddings[token_ids]
+        # V = embeddings[token_ids]
 
         # st.write('Q.shape=', Q.shape)
         # st.write('Q=', Q)
