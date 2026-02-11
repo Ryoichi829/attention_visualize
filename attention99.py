@@ -24,10 +24,10 @@ def softmax(x, T=1.0):
     return e_x / e_x.sum(axis=-1, keepdims=True)
 
 def self_attention(Q, K, V):
-    scores = np.dot(Q, K.T) / np.sqrt(K.shape[-1])
+    scores = np.dot(Q, K.T)
     # 対角マスク（自分自身への注意を禁止）
     np.fill_diagonal(scores, -1e9)
-    attention_weights = softmax(scores, T=1.8) # 2.0でマイルドにする
+    attention_weights = softmax(scores, T=1.2)
     output = np.dot(attention_weights, V)
     return output, attention_weights
 
@@ -81,6 +81,10 @@ def load_word_vectors():
     model = KeyedVectors.load_word2vec_format(temp_path, binary=True)
     return model
 
+def normalize_rows(x):
+    norms = np.linalg.norm(x, axis=1, keepdims=True) + 1e-8
+    return x / norms
+
 def main():
     st.title("Self-Attention Mechanism Visualization")
     word_vectors = load_word_vectors()
@@ -100,6 +104,8 @@ def main():
                 embeddings[idx] = word_vectors[word][:embedding_dim]
             else:
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
+            for word in ["は","が","を","に","の","と","で"]:
+                embeddings[idx] *= 0.3
 
         # np.random.seed(0)
         
@@ -112,8 +118,8 @@ def main():
         # V = embeddings[token_ids] @ Wv
 
         
-        Q = embeddings[token_ids]
-        K = embeddings[token_ids]
+        Q = normalize_rows(embeddings[token_ids])
+        K = normalize_rows(embeddings[token_ids])
         V = embeddings[token_ids]
 
         # st.write('Q.shape=', Q.shape)
