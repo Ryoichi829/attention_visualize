@@ -112,7 +112,7 @@ def main():
             else:
                 unknown_words.append(word)
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
-            for word in ["は","が","を","に","の","と","で","。"]:
+            if word in ["は","が","を","に","の","と","で","。"]:
                 embeddings[idx] *= 0.1
 
         st.write("未登録語:", unknown_words if unknown_words else "なし")
