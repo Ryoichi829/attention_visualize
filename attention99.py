@@ -9,7 +9,8 @@ from gensim.models import KeyedVectors
 import requests
 import os
 
-dropbox_link = "https://www.dropbox.com/scl/fi/xvpmnduzus1xt4x1oqj09/jawiki.entity_vectors.100d_200_000.bin?rlkey=gwxb0swvg23ekh9mhezjw6f6j&st=p752egym&dl=1"
+# dropbox_link = "https://www.dropbox.com/scl/fi/xvpmnduzus1xt4x1oqj09/jawiki.entity_vectors.100d_200_000.bin?rlkey=gwxb0swvg23ekh9mhezjw6f6j&st=p752egym&dl=1"
+dropbox_link = "https://www.dropbox.com/scl/fi/89zfk7npuo5suivpkox97/jawiki.word_vectors.300d.bin?rlkey=4hi0dkpr16plbsdb2w37v3u1r&st=elewsxwv&dl=1"
 
 def download_file(url, destination):
     response = requests.get(url, stream=True)
@@ -74,7 +75,7 @@ def tokenize_japanese(text):
 # @st.cache(allow_output_mutation=True)
 @st.cache_resource
 def load_word_vectors():
-    temp_path = "/tmp/jawiki.word_vectors.100d.bin"
+    temp_path = "/tmp/jawiki.word_vectors.300d.bin"
     if not os.path.exists(temp_path):
         download_file(dropbox_link, temp_path)
     
