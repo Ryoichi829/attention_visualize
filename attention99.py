@@ -142,7 +142,7 @@ def main():
         st.pyplot(fig)
 
         # 著作権表示
-        st.write("東北大学乾研究室の日本語Wikipediaエンティティベクトルを使用しています。")
+        st.write("東北大学乾研究室の日本語Wikipedia Word2Vec（300次元）モデルを使用しています。")
 
 if __name__ == "__main__":
     main()
