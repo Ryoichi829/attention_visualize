@@ -111,8 +111,7 @@ def main():
             for word in ["は","が","を","に","の","と","で","。"]:
                 embeddings[idx] *= 0.1
 
-        if unknown_words:
-            st.warning("未登録語: " + "、".join(unknown_words))
+        st.write("未登録語:", unknown_words if unknown_words else "なし")
         
         # np.random.seed(0)
         
