@@ -87,16 +87,19 @@ def normalize_rows(x):
     return x / norms
 
 def main():
+    np.random.seed(0)
     st.title("Self-Attention Mechanism Visualization")
     word_vectors = load_word_vectors()
     sentence = st.text_area("文章を入力してください。", "このケーキはやばいほど美味しい。")
     if st.button("Visualize"):
         tokens = tokenize_japanese(sentence)
         # st.write('tokens', tokens)
-        vocab = {word: idx for idx, word in enumerate(set(tokens))}
+        # vocab = {word: idx for idx, word in enumerate(set(tokens))}
+        vocab = {word: idx for idx, word in enumerate(sorted(set(tokens)))}
+
         token_ids = np.array([vocab[word] for word in tokens])
 
-        embedding_dim = 100
+        embedding_dim = 300
         embeddings = np.zeros((len(vocab), embedding_dim))
         
         # st.write('vocab:', vocab)
