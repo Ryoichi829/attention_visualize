@@ -99,14 +99,21 @@ def main():
         embeddings = np.zeros((len(vocab), embedding_dim))
         
         # st.write('vocab:', vocab)
+
+        unknown_words = []
+        
         for word, idx in vocab.items():
             if word in word_vectors:
                 embeddings[idx] = word_vectors[word][:embedding_dim]
             else:
+                unknown_words.append(word)
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
             for word in ["は","が","を","に","の","と","で","。"]:
                 embeddings[idx] *= 0.1
 
+        if unknown_words:
+            st.warning("未登録語: " + "、".join(unknown_words))
+        
         # np.random.seed(0)
         
         # Wq = np.random.randn(embedding_dim, embedding_dim)
