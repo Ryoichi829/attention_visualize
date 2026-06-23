@@ -90,7 +90,7 @@ def main():
     np.random.seed(0)
     st.title("Self-Attention Mechanism Visualization")
     word_vectors = load_word_vectors()
-    sentence = st.text_area("文章を入力してください", "猫が魚を食べた")
+    sentence = st.text_area("文章を入力してください", "この動画やばい")
     if st.button("Visualize"):
         tokens = tokenize_japanese(sentence)
         # st.write('tokens', tokens)
