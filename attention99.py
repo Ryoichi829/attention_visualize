@@ -29,8 +29,8 @@ def self_attention(Q, K, V, tokens, practice_weight=0.1):
     # 1.0 -> 補正なし
     # 0.1 -> 助詞などへの重みを抑える
     # 0より大きく、1以下で指定
-    if not 0 < particle_weight <= 1:
-        raise ValueError("particle_weightは0より大きく1以下にしてください")
+    if not 0 < practice_weight <= 1:
+        raise ValueError("practice_weightは0より大きく1以下にしてください")
 
     suppressed_tokens = {
         "は", "が", "を", "に", "の", "と", "で",
