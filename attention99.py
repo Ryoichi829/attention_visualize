@@ -24,12 +24,45 @@ def softmax(x, T=1.0):
     e_x = np.exp(x - np.max(x))
     return e_x / e_x.sum(axis=-1, keepdims=True)
 
-def self_attention(Q, K, V):
-    scores = np.dot(Q, K.T) * 4
-    # 対角マスク（自分自身への注意を禁止）
-    np.fill_diagonal(scores, -1e9)
-    attention_weights = softmax(scores, T=0.5)
-    output = np.dot(attention_weights, V)
+def self_attention(Q, K, V, tokens, practice_weight=0.1):
+    # practice_weight:
+    # 1.0 -> 補正なし
+    # 0.1 -> 助詞などへの重みを抑える
+    # 0より大きく、1以下で指定
+    if not 0 < particle_weight <= 1:
+        raise ValueError("particle_weightは0より大きく1以下にしてください")
+
+    suppressed_tokens = {
+        "は", "が", "を", "に", "の", "と", "で",
+        "や", "も", "へ", "から", "まで", "より",
+        "ね", "よ", "、", "。"
+    }
+    
+    #元コードと同じ類似度・温度設定
+    logits = (Q @ K.T) * 4 / 0.5
+    
+    # 注目先（key）の単語ごとに補正する
+    factors = np.array([
+        particle_weight if token in suppressed_tokens else 1.0
+        for token in tokens
+    ])
+
+    # softmax前にlogを加えることで、
+    # softmaxの分子に補正係数を掛けたことになる
+    logits += np.log(factors)[None, :]
+
+    # 自分自身への注意を禁止
+    np.fill_diagonal(logits, -np.inf)
+
+    # 行ごとにsoftmaxを計算
+    exp_scores = np.exp(
+        logits - np.max(logits, axis=1, keepdims=True)
+    )
+    attention_weights = (
+        exp_scores / exp_scores.sum(axis=1, keepdims=True)
+    )
+
+    output = attention_weights @ V
     return output, attention_weights
 
 def plot_attention(tokens, attention_weights):
@@ -112,31 +145,16 @@ def main():
             else:
                 unknown_words.append(word)
                 embeddings[idx] = np.random.uniform(-0.25, 0.25, embedding_dim)
-            if word in ["は","が","を","に","の","と","で","、","。"]:
-                embeddings[idx] *= 0.1
 
         st.write("未登録語:", unknown_words if unknown_words else "なし")
-        
-        # np.random.seed(0)
-        
-        # Wq = np.random.randn(embedding_dim, embedding_dim)
-        # Wk = np.random.randn(embedding_dim, embedding_dim)
-        # Wv = np.random.randn(embedding_dim, embedding_dim)
-
-        # Q = embeddings[token_ids] @ Wq
-        # K = embeddings[token_ids] @ Wk
-        # V = embeddings[token_ids] @ Wv
-
         
         Q = normalize_rows(embeddings[token_ids])
         K = normalize_rows(embeddings[token_ids])
         V = embeddings[token_ids]
 
-        # st.write('Q.shape=', Q.shape)
-        # st.write('Q=', Q)
-
-        output, attention_weights = self_attention(Q, K, V)
-        # st.write("Tokens:", '　'.join(tokens))
+        output, attention_weights = self_attention(
+            Q, K, V, tokens, practice_weight=0.1
+        )
 
         fig = plot_attention(tokens, attention_weights)
         st.pyplot(fig)
