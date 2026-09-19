@@ -43,7 +43,7 @@ def self_attention(Q, K, V, tokens, practice_weight=0.1):
     
     # 注目先（key）の単語ごとに補正する
     factors = np.array([
-        particle_weight if token in suppressed_tokens else 1.0
+        practice_weight if token in suppressed_tokens else 1.0
         for token in tokens
     ])
 
